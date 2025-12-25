@@ -23,7 +23,7 @@ class TestAzureOpenAISettings:
             assert settings.endpoint == ""
             assert settings.api_key == ""
             assert settings.deployment == "gpt-4o"
-            assert settings.api_version == "2024-08-01-preview"
+            assert settings.api_version == "2025-04-01-preview"
 
     def test_loads_from_env(self):
         """Test loading from environment variables."""

@@ -17,7 +17,7 @@ class LLMClient:
         endpoint: str,
         api_key: str,
         deployment: str,
-        api_version: str = "2024-08-01-preview",
+        api_version: str = "2025-04-01-preview",
         temperature: float = 0.1,
     ):
         """Initialize the LLM client.
@@ -87,7 +87,7 @@ def create_llm_client(
     endpoint: str,
     api_key: str,
     deployment: str,
-    api_version: str = "2024-08-01-preview",
+    api_version: str = "2025-04-01-preview",
     temperature: float = 0.1,
 ) -> LLMClient:
     """Factory function to create an LLM client.

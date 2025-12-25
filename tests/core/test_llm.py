@@ -17,14 +17,14 @@ class TestLLMClient:
                 endpoint="https://test.openai.azure.com",
                 api_key="test-key",
                 deployment="gpt-4o",
-                api_version="2024-08-01-preview",
+                api_version="2025-04-01-preview",
                 temperature=0.1,
             )
 
             mock_azure.assert_called_once_with(
                 azure_endpoint="https://test.openai.azure.com",
                 api_key="test-key",
-                api_version="2024-08-01-preview",
+                api_version="2025-04-01-preview",
             )
             assert client.deployment == "gpt-4o"
             assert client.temperature == 0.1

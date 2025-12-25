@@ -32,7 +32,7 @@ class AzureOpenAISettings(BaseSettings):
     api_key: str = Field(default="", alias="AZURE_OPENAI_API_KEY")
     deployment: str = Field(default="gpt-4o", alias="AZURE_OPENAI_DEPLOYMENT")
     api_version: str = Field(
-        default="2024-08-01-preview", alias="AZURE_OPENAI_API_VERSION"
+        default="2025-04-01-preview", alias="AZURE_OPENAI_API_VERSION"
     )
 
 

@@ -75,7 +75,7 @@ class BaseAgent(ABC):
 
                 conversation_history = list(state.get("conversation_history", []))
 
-                answer, routing = await agent_react_step(
+                answer, _ = await agent_react_step(
                     self.mcp_client,
                     system_prompt,
                     conversation_history,

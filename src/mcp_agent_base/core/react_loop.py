@@ -64,6 +64,8 @@ async def agent_react_step(
     if schema is None:
         schema = load_agent_response_schema()
 
+    logger.info("%s: Starting ReAct loop...", agent_name)
+
     async with mcp_client.session() as session:
         while True:
             user_message = "\n\n###\n\n".join(conversation_history)
