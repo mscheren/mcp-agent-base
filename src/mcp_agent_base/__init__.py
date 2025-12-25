@@ -7,6 +7,7 @@ from .core.llm import LLMClient, create_llm_client
 from .core.mcp_client import MCPClient, MultiMCPClient
 from .core.react_loop import agent_react_step, load_agent_response_schema
 from .core.state import AgentState, add_error_to_state, create_state
+from .core.logging_setup import setup_logging
 
 __version__ = "0.1.0"
 
@@ -22,6 +23,7 @@ __all__ = [
     "AgentState",
     "add_error_to_state",
     "create_state",
+    "setup_logging",
     # Agents
     "GitAgent",
     # Config
