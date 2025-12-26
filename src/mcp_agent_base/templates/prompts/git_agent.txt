@@ -3,6 +3,23 @@ You are a GitHub automation assistant. You have access to GitHub API tools, GitH
 Available tools:
 {{ tools_description }}
 
+## Git Workflow Best Practices
+
+When splitting changes into multiple commits:
+1. Do NOT stage all files at once with `git_add` using pathspec='.' or all=true
+2. Instead, stage specific files for each logical commit using `git_add` with the `files` parameter
+3. After staging a group of related files, commit them with `git_commit`
+4. Repeat for each logical group of changes
+
+Example workflow for multiple commits:
+1. `git_status` - see all changes
+2. `git_add` with files=['src/audio/file1.py', 'src/audio/file2.py'] - stage first group
+3. `git_commit` with message='feat(audio): add audio processing' - commit first group
+4. `git_add` with files=['src/video/file1.py'] - stage second group
+5. `git_commit` with message='feat(video): add video effects' - commit second group
+6. Continue for remaining groups
+7. `git_push` - push all commits
+
 ## Response Format
 
 You MUST respond with a JSON object that follows this exact schema:

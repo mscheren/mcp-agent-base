@@ -60,10 +60,14 @@ def build_git_command(tool_name: str, arguments: dict[str, Any]) -> list[str]:
     # Start with base command
     cmd_parts = ["git", git_cmd]
 
-    # Add boolean flags
+    # Add boolean flags (with command-specific overrides)
     for arg, flag in ARG_MAPPINGS.items():
         if arguments.get(arg, False):
-            cmd_parts.append(flag)
+            # git add uses --all or -A, not -a
+            if arg == "all" and git_cmd == "add":
+                cmd_parts.append("-A")
+            else:
+                cmd_parts.append(flag)
 
     # Handle options array
     if "options" in arguments:
@@ -85,6 +89,13 @@ def build_git_command(tool_name: str, arguments: dict[str, Any]) -> list[str]:
     # Handle common arguments
     if "message" in arguments:
         cmd_parts.extend(["-m", arguments["message"]])
+
+    # Handle files for git commit (after message, with -- separator)
+    if git_cmd == "commit" and "files" in arguments:
+        files = arguments.pop("files")  # Remove so it's not added again below
+        if files:
+            cmd_parts.append("--")
+            cmd_parts.extend(files)
 
     if "max_count" in arguments:
         cmd_parts.extend(["-n", str(arguments["max_count"])])

@@ -21,7 +21,7 @@
   },
   {
     "name": "git_add",
-    "description": "Add file contents to the index",
+    "description": "Add file contents to the staging area. Use 'files' to stage specific files, 'pathspec' for glob patterns like '.', or 'all' to stage all changes.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -30,16 +30,15 @@
           "items": {
             "type": "string"
           },
-          "description": "Files to add to the index"
+          "description": "Specific files to add to the staging area (e.g., ['src/file1.py', 'src/file2.py'])"
+        },
+        "pathspec": {
+          "type": "string",
+          "description": "Path pattern to add (e.g., '.' for all, 'src/*.py' for pattern)"
         },
         "all": {
           "type": "boolean",
-          "description": "Add all modified and deleted files",
-          "default": false
-        },
-        "interactive": {
-          "type": "boolean",
-          "description": "Interactive mode",
+          "description": "Stage all changes including untracked files (equivalent to git add -A)",
           "default": false
         },
         "directory": {
@@ -52,13 +51,20 @@
   },
   {
     "name": "git_commit",
-    "description": "Record changes to the repository",
+    "description": "Record changes to the repository. Use 'files' to commit specific staged files, 'all' to auto-stage and commit all modified files, or neither to commit all currently staged files.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "message": {
           "type": "string",
           "description": "Commit message"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specific files to commit (files must be staged first with git_add)"
         },
         "amend": {
           "type": "boolean",
@@ -67,7 +73,7 @@
         },
         "all": {
           "type": "boolean",
-          "description": "Commit all changed files",
+          "description": "Automatically stage and commit all modified/deleted files (equivalent to git commit -a)",
           "default": false
         },
         "directory": {
@@ -75,6 +81,7 @@
           "description": "Directory to run git command in"
         }
       },
+      "required": ["message"],
       "additionalProperties": false
     }
   },
